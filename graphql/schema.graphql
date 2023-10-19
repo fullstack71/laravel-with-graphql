@@ -1,5 +1,5 @@
 type Query {
-    users: [User!]! @all
+    users: [User!]! @all(scopes: ["verified"])
     allPosts: [Post!]! @all
     posts(orderBy: _ @orderBy(columns: ["id", "title"])): [Post!]! @paginate
     post(id: ID! @eq): Post @find
