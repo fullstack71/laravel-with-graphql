@@ -1,13 +1,14 @@
 type Query {
-  users: [User!]! @all
-  allPosts: [Post!]! @all
-  posts: [Post!]! @paginate
+    users: [User!]! @all
+    allPosts: [Post!]! @all
+    posts: [Post!]! @paginate
+    post(id: ID! @eq): Post @find
 }
 
 type User {
-  id: ID!
-  name: String
-  posts: [Post!]! @hasMany
+    id: ID!
+    name: String
+    posts: [Post!]! @hasMany
 }
 
 type Post {
