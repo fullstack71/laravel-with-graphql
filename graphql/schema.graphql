@@ -1,7 +1,7 @@
 type Query {
     users: [User!]! @all
     allPosts: [Post!]! @all
-    posts: [Post!]! @paginate
+    posts(orderBy: _ @orderBy(columns: ["id", "title"])): [Post!]! @paginate
     post(id: ID! @eq): Post @find
 }
 
