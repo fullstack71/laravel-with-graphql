@@ -15,7 +15,7 @@ type Query {
 type User {
     id: ID!
     name: String
-    posts: [Post!]! @hasMany
+    blogs: [Post!]! @hasMany(relation: "posts")
 }
 
 type Post {
