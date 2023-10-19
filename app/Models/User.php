@@ -18,4 +18,8 @@ class User extends Authenticatable
         return $query->whereNull('email_verified_at');
     }
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }
