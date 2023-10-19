@@ -1,8 +1,17 @@
 type Query {
   users: [User!]! @all
+  allPosts: [Post!]! @all
+  posts: [Post!]! @paginate
 }
 
 type User {
   id: ID!
   name: String
+  posts: [Post!]! @hasMany
+}
+
+type Post {
+    id: ID!
+    title: String!
+    description: String!
 }
