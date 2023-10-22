@@ -1,5 +1,5 @@
 type Mutation {
-    createUser(name: String!, email: String!, password: String!): User! @create
+    createUser(input: CreateUserInput! @spread): User! @create
     updateUser(id: ID!, name: String, email: String, password: String): User! @update
     deleteUser(id: ID! @whereKey): User @delete
 }
@@ -7,7 +7,7 @@ type Mutation {
 
 type Query {
     users: [User!]! @all(scopes: ["verified"])
-    allPosts: [Post!]! @all
+    allPosts: [Post!]! @all @softDeletes
     posts(orderBy: _ @orderBy(columns: ["id", "title"])): [Post!]! @paginate
     post(id: ID! @eq): Post @find
 }
@@ -22,4 +22,19 @@ type Post {
     id: ID!
     title: String!
     description: String!
+}
+input CreateUserInput {
+    name: String!
+    email: String !  @rules(apply: ["email", "unique:users,email"])
+    password: String! @rules(apply: [ "required", "min:8"])
+    posts: CreatePostsHasMany
+}
+
+input CreatePostsHasMany {
+    create: [CreatePostInput!]!
+}
+
+input CreatePostInput {
+    title: String!
+    description: String
 }
